@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温度转换器</title>
+    <link rel="stylesheet" href="style.css"> <!-- 引入 CSS 文件 -->
+</head>
+<body>
+    <div class="container">
+        <h2>温度转换器</h2>
+        
+        <label for="tempInput">输入温度：</label>
+        <input type="number" id="tempInput" placeholder="请输入温度">
+
+        <label for="unit">选择转换方向：</label>
+        <select id="unit">
+            <option value="C">摄氏度 ➜ 华氏度</option>
+            <option value="F">华氏度 ➜ 摄氏度</option>
+        </select>
+
+        <p>转换结果：<span id="result">-</span></p>
+    </div>
+
+    <script src="script.js"></script> <!-- 引入 JS 文件 -->
+</body>
+</html>
