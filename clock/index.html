@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>倒计时</h2>
+
+        <label for="countdownInput">输入秒数：</label>
+        <input type="number" id="countdownInput" placeholder="输入时间">
+
+        <div class="buttons">
+            <button onclick="startCountdown()">开始</button>
+            <button onclick="pauseCountdown()">暂停</button>
+            <button onclick="resumeCountdown()">继续</button>
+            <button onclick="resetCountdown()">重置</button>
+        </div>
+
+        <p>剩余时间：<span id="countdownDisplay">-</span> 秒</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

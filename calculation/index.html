@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单计算器</title>
+    <link rel="stylesheet" href="style.css"> <!-- 引入 CSS -->
+</head>
+<body>
+    <div class="container">
+        <h2>计算器</h2>
+
+        <label for="num1">输入第一个数：</label>
+        <input type="number" id="num1" placeholder="输入数字">
+        
+        <label for="num2">输入第二个数：</label>
+        <input type="number" id="num2" placeholder="输入数字">
+
+        <div class="buttons">
+            <button onclick="calculate('+')">加 +</button>
+            <button onclick="calculate('-')">减 -</button>
+            <button onclick="calculate('*')">乘 ×</button>
+            <button onclick="calculate('/')">除 ÷</button>
+        </div>
+
+        <p>计算结果：<span id="calcResult">-</span></p>
+    </div>
+
+    <script src="script.js"></script> <!-- 引入 JS -->
+</body>
+</html>

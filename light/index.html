@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灯泡开关</title>
+    <style>
+        body { text-align: center; font-size: 24px; }
+        img { width: 150px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>灯泡开关</h2>
+    
+    <!-- 灯泡图片 -->
+    <img id="bulb" src="https://www.w3schools.com/js/pic_bulboff.gif" alt="灯泡">
+    
+    <br>
+    
+    <!-- 开关按钮 -->
+    <button onclick="toggleBulb()">开/关</button>
+
+    <script>
+        function toggleBulb() {
+            let bulb = document.getElementById("bulb"); // 获取灯泡图片元素
+            
+            if (bulb.src.includes("bulboff")) {
+                bulb.src = "https://www.w3schools.com/js/pic_bulbon.gif"; // 变亮
+            } else {
+                bulb.src = "https://www.w3schools.com/js/pic_bulboff.gif"; // 变暗
+            }
+        }
+    </script>
+</body>
+</html>

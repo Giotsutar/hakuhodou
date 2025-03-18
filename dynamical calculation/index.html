@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态时钟</title>
+    <style>
+        body { text-align: center; font-size: 24px; }
+        #clock { font-size: 36px; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>动态时钟</h2>
+    <p id="clock">--:--:--</p>
+
+    <script>
+        function updateClock() {
+            let now = new Date(); // 获取当前时间
+            let hours = now.getHours().toString().padStart(2, '0'); // 获取小时，补足2位
+            let minutes = now.getMinutes().toString().padStart(2, '0'); // 获取分钟，补足2位
+            let seconds = now.getSeconds().toString().padStart(2, '0'); // 获取秒数，补足2位
+            document.getElementById("clock").textContent = `${hours}:${minutes}:${seconds}`; // 更新到页面
+        }
+
+        updateClock(); // 立即执行一次，防止空白
+        setInterval(updateClock, 1000); // 然后每秒更新一次
+    </script>
+</body>
+</html>
