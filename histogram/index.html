@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态柱状图</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>动态柱状图 📊</h2>
+    <canvas id="dynamicBarChart"></canvas>
+
+    <script>
+        // 获取 Canvas 上下文
+        let ctx = document.getElementById("dynamicBarChart").getContext("2d");
+
+        // 初始数据
+        let labels = ["A", "B", "C", "D", "E"];
+        let chartData = [10, 20, 15, 25, 30];
+
+        // 创建 Chart.js 柱状图
+        let chart = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "实时数据",
+                    data: chartData,
+                    backgroundColor: ["red", "blue", "green", "purple", "orange"]
+                }]
+            },
+            options: {
+                responsive: true,
+                animation: {
+                    duration: 500 // 让动画更流畅
+                }
+            }
+        });
+
+        // 更新数据的函数
+        function updateData() {
+            chartData.shift(); // 移除最旧的数据
+            chartData.push(Math.floor(Math.random() * 50)); // 添加新随机数据
+
+            chart.update(); // 更新图表
+        }
+
+        // 每秒更新一次数据
+        setInterval(updateData, 1000);
+    </script>
+</body>
+</html>
