@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手动更新温度变化折线图</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>温度变化（手动更新）</h2>
+    <canvas id="temperatureChart"></canvas>
+    <br>
+    <button onclick="updateTemperature()">更新温度</button>
+
+    <script>
+        // 获取 Canvas 上下文
+        let ctx = document.getElementById("temperatureChart").getContext("2d");
+
+        // 初始数据
+        let labels = ["0s", "1s", "2s", "3s", "4s"];
+        let temperatureData = [22, 23, 21, 24, 22];
+        let timeIndex = 5; // 时间索引，初始值为 5
+
+        // 创建 Chart.js 折线图
+        let chart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "温度 (°C)",
+                    data: temperatureData,
+                    borderColor: "red",
+                    backgroundColor: "rgba(255, 0, 0, 0.2)",
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                animation: {
+                    duration: 500
+                }
+            }
+        });
+
+        // 更新温度数据（手动）
+        function updateTemperature() {
+            labels.shift(); // 移除最旧的时间点
+            labels.push(`${timeIndex}s`); // 添加新的时间点
+            timeIndex++; // 时间增加 1
+
+            temperatureData.shift(); // 移除最旧的温度数据
+            temperatureData.push(Math.floor(Math.random() * 6) + 20); // 生成 20~25°C 的温度数据
+
+            chart.update(); // 更新图表
+        }
+    </script>
+</body>
+</html>

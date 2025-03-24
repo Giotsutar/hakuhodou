@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDP 可视化</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h2>GDP 变化趋势（世界银行数据）</h2>
+
+    <label for="country">选择国家：</label>
+    <select id="country">
+        <option value="CN">中国</option>
+        <option value="US">美国</option>
+        <option value="JP">日本</option>
+        <option value="DE">德国</option>
+    </select>
+    <button onclick="fetchGDP()">查询 GDP</button>
+
+    <canvas id="gdpChart"></canvas>
+
+    <script>
+        let ctx = document.getElementById("gdpChart").getContext("2d");
+        let chart;
+
+        // 获取 GDP 数据
+        async function fetchGDP() {
+            let country = document.getElementById("country").value;
+            let url = `https://api.worldbank.org/v2/country/${country}/indicator/NY.GDP.MKTP.CD?format=json`;
+
+            try {
+                let response = await fetch(url);
+                let data = await response.json();
+
+                let years = data[1].map(entry => entry.date).reverse(); // 获取年份
+                let gdpValues = data[1].map(entry => entry.value / 1e12).reverse(); // 转换为万亿美元
+
+                updateChart(years, gdpValues, country);
+            } catch (error) {
+                console.error("获取 GDP 数据失败:", error);
+            }
+        }
+
+        // 更新 Chart.js 折线图
+        function updateChart(years, gdpValues, country) {
+            if (chart) {
+                chart.destroy(); // 销毁旧的 Chart 实例
+            }
+
+            chart = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: years,
+                    datasets: [{
+                        label: `${country} GDP (万亿美元)`,
+                        data: gdpValues,
+                        borderColor: "blue",
+                        backgroundColor: "rgba(0, 0, 255, 0.2)",
+                        fill: true
+                    }]
+                }
+            });
+        }
+    </script>
+</body>
+</html>

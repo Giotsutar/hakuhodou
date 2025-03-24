@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雷达图 - 用户满意度分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { text-align: center; font-size: 18px; }
+        .input-container { margin-top: 10px; }
+        input { width: 50px; text-align: center; }
+    </style>
+</head>
+<body>
+    <h2>用户满意度分析（雷达图）</h2>
+    <canvas id="radarChart"></canvas>
+
+    <div class="input-container">
+        <p>请输入 1~5 之间的评分：</p>
+        <label>服务：<input type="number" id="service" min="1" max="5" value="4"></label>
+        <label>价格：<input type="number" id="price" min="1" max="5" value="3"></label>
+        <label>质量：<input type="number" id="quality" min="1" max="5" value="5"></label>
+        <label>配送：<input type="number" id="delivery" min="1" max="5" value="2"></label>
+        <label>响应速度：<input type="number" id="response" min="1" max="5" value="4"></label>
+        <br>
+        <button onclick="updateRadarChart()">更新数据</button>
+    </div>
+
+    <script>
+        // 获取 Canvas 上下文
+        let ctx = document.getElementById("radarChart").getContext("2d");
+
+        // 初始标签（X 轴）
+        let labels = ["服务", "价格", "质量", "配送", "响应速度"];
+        // 初始数据
+        let radarData = [4, 3, 5, 2, 4];
+
+        // 创建雷达图
+        let radarChart = new Chart(ctx, {
+            type: "radar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "用户满意度",
+                    data: radarData,
+                    backgroundColor: "rgba(0, 123, 255, 0.2)",
+                    borderColor: "blue",
+                    pointBackgroundColor: "blue",
+                    pointBorderColor: "#fff",
+                    pointHoverBackgroundColor: "#fff",
+                    pointHoverBorderColor: "blue"
+                }]
+            },
+            options: {
+                responsive: true,
+                scale: {
+                    ticks: {
+                        min: 1,
+                        max: 5,
+                        stepSize: 1
+                    }
+                }
+            }
+        });
+
+        // 更新雷达图数据
+        function updateRadarChart() {
+            let newData = [
+                parseInt(document.getElementById("service").value),
+                parseInt(document.getElementById("price").value),
+                parseInt(document.getElementById("quality").value),
+                parseInt(document.getElementById("delivery").value),
+                parseInt(document.getElementById("response").value)
+            ];
+
+            radarChart.data.datasets[0].data = newData;
+            radarChart.update(); // 更新图表
+        }
+
+    //在 JavaScript 中，所有通过 document.getElementById("inputID").value 获取的 <input> 值默认是字符串，即使用户输入的是数字。    
+    </script>
+</body>
+</html>
+
